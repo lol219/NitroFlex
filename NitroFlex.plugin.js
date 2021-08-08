@@ -1,7 +1,7 @@
 /**
  * @name NitroFlex
- * @authorLink https://github.com/Cosmiiko
- * @source https://github.com/Cosmiiko/BD-PoorPeoplesNitro
+ * @authorLink https://github.com/lol219
+ * @source https://github.com/lol219/NitroFlex
  */
 /*@cc_on
 @if (@_jscript)
@@ -41,8 +41,8 @@ module.exports = (() => {
             "version":"1.0.0",
             "description":
             "A plugin that sends emotes' links when you click on them. with 1080 bypass screenshare ,Continued by Alexandro(Discontinued by Lemon)",
-            "github":"",
-            "github_raw":""
+            "github":"https://github.com/lol219/NitroFlex",
+            "github_raw":"https://raw.githubusercontent.com/lol219/NitroFlex/main/NitroFlex.plugin.js"
         },
         "changelog":[
             {
