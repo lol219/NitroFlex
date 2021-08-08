@@ -71,7 +71,7 @@ module.exports = (() => {
                     "github_username":"lol219"
                 }
             ],
-            "version":"1.0.0",
+            "version":"1.0.1",
             "description":
             "A plugin that sends emotes' links when you click on them. with 1080 bypass screenshare ,Continued by Alexandro(Discontinued by Lemon)",
             "github":"https://github.com/lol219/NitroFlex",
@@ -80,8 +80,8 @@ module.exports = (() => {
         "changelog":[
             {
                 "title": 'Chnagelog',
-                "type": 'added',
-                "items": ['Settings'],
+                "type": 'Fixed',
+                "items": ['Discord Crashes'],
             }
         ],
         "main":"index.js"
