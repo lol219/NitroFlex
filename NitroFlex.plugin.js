@@ -2,6 +2,7 @@
  * @name NitroFlex
  * @authorLink https://github.com/lol219
  * @source https://github.com/lol219/NitroFlex
+ * @invite TCuGtFNhpq
  */
 /*@cc_on
 @if (@_jscript)
@@ -48,7 +49,7 @@ module.exports = (Plugin, Library) => {
 class CodingDND{
     getName() {return "NitroFlex";}
     getDescription() {return "A plugin that sends emotes' links when you click on them. with 1080 bypass screenshare ,Continued by Alexandro(Discontinued by Lemon)";}
-    getVersion() {return "1.0.1";}
+    getVersion() {return "1.0.2";}
     getAuthor() {return "Alexandro";}
 
     start() {
@@ -60,6 +61,14 @@ class CodingDND{
 
     }
 }
+/*return (window.Lightcord || window.LightCord) ? class {
+        getName () {return config.info.name;}
+        getAuthor () {return config.info.author;}
+        getVersion () {return config.info.version;}
+        getDescription () {return "Do not use LightCord!";}
+        load () {BdApi.alert("Attention!", "By using LightCord you are risking your Discord Account, due to using a 3rd Party Client. Switch to an official Discord Client (https://discord.com/) with the proper BD Injection (https://betterdiscord.app/)");}
+        start() {}
+        stop() {}*/
 module.exports = (() => {
     const config = {
         "info": {
@@ -71,7 +80,7 @@ module.exports = (() => {
                     "github_username":"lol219"
                 }
             ],
-            "version":"1.0.1",
+            "version":"1.0.2",
             "description":
             "A plugin that sends emotes' links when you click on them. with 1080 bypass screenshare ,Continued by Alexandro(Discontinued by Lemon)",
             "github":"https://github.com/lol219/NitroFlex",
@@ -80,14 +89,18 @@ module.exports = (() => {
         "changelog":[
             {
                 "title": 'Chnagelog',
-                "type": 'Fixed',
-                "items": ['Discord Crashes'],
-            }
-        ],
+                "type": 'Added',
+                "items": ['Now The Plugin will support Devil Bro lib and ZeresPluginLibrary \n Fixed bugs'],
+            },
+            
+         
+        ],   
+        
+        
+        
         "main":"index.js"
     };
-    
-   return !global.ZeresPluginLibrary ? class {
+    return !global.ZeresPluginLibrary ? class {
         constructor() {
             this._config = config;
         }
@@ -117,6 +130,40 @@ module.exports = (() => {
         }
         start() {}
         stop() {}
+        } : !window.BDFDB_Global || (!window.BDFDB_Global.loaded && !window.BDFDB_Global.started) ? class {
+        getName () {return config.info.name;}
+        getAuthor () {return config.info.author;}
+        getVersion () {return config.info.version;}
+        getDescription () {return `The Library Plugin needed for ${config.info.name} is missing. Open the Plugin Settings to download it. \n\n${config.info.description}`;}
+        
+        downloadLibrary () {
+            require("request").get("https://mwittrien.github.io/BetterDiscordAddons/Library/0BDFDB.plugin.js", (e, r, b) => {
+                if (!e && b && r.statusCode == 200) require("fs").writeFile(require("path").join(BdApi.Plugins.folder, "0BDFDB.plugin.js"), b, _ => BdApi.showToast("Finished downloading BDFDB Library", {type: "success"}));
+                else BdApi.alert("Error", "Could not download BDFDB Library Plugin. Try again later or download it manually from GitHub: https://mwittrien.github.io/downloader/?library");
+            });
+        }
+        
+        load () {
+            if (!window.BDFDB_Global || !Array.isArray(window.BDFDB_Global.pluginQueue)) window.BDFDB_Global = Object.assign({}, window.BDFDB_Global, {pluginQueue: []});
+            if (!window.BDFDB_Global.downloadModal) {
+                window.BDFDB_Global.downloadModal = true;
+                BdApi.showConfirmationModal("Library Missing", `The Library Plugin needed for ${config.info.name} is missing. Please click "Download Now" to install it.`, {
+                    confirmText: "Download Now",
+                    cancelText: "Cancel",
+                    onCancel: _ => {delete window.BDFDB_Global.downloadModal;},
+                    onConfirm: _ => {
+                        delete window.BDFDB_Global.downloadModal;
+                        this.downloadLibrary();
+                    }
+                });
+            }
+            if (!window.BDFDB_Global.pluginQueue.includes(config.info.name)) window.BDFDB_Global.pluginQueue.push(config.info.name);
+        }
+        start () {this.load();}
+        stop () {}
+    
+    
+    
 
     } : (([Plugin, Api]) => {
         const plugin = (Plugin,Api) => {
