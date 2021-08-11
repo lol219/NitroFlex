@@ -80,7 +80,7 @@ module.exports = (() => {
                     "github_username":"lol219"
                 }
             ],
-            "version":"1.0.2",
+            "version":"1.0.3",
             "description":
             "A plugin that sends emotes' links when you click on them. with 1080 bypass screenshare ,Continued by Alexandro(Discontinued by Lemon)",
             "github":"https://github.com/lol219/NitroFlex",
@@ -88,18 +88,18 @@ module.exports = (() => {
         },
         "changelog":[
             {
-                "title": 'Chnagelog',
-                "type": 'Added',
-                "items": ['Now The Plugin will support Devil Bro lib and ZeresPluginLibrary \n Fixed bugs'],
-            },
+                "title": 'changelog',
+                "type": 'fixed',
+                "items": ['**Plugin** : Discord and Screenshare Crash']
+            }
             
-         
         ],   
         
         
         
         "main":"index.js"
     };
+
     return !global.ZeresPluginLibrary ? class {
         constructor() {
             this._config = config;
@@ -130,6 +130,12 @@ module.exports = (() => {
         }
         start() {}
         stop() {}
+       /*} : !(window.Lightcord || window.LightCord) ? class {
+        getName () {return config.info.name;}
+        getAuthor () {return config.info.author;}
+        getVersion () {return config.info.version;}
+        getDescription () {return "Do not use LightCord!";}
+        load () {BdApi.alert("Attention!", "By using LightCord you are risking your Discord Account, due to using a 3rd Party Client. Switch to an official Discord Client (https://discord.com/) with the proper BD Injection (https://betterdiscord.app/)");}*/
         } : !window.BDFDB_Global || (!window.BDFDB_Global.loaded && !window.BDFDB_Global.started) ? class {
         getName () {return config.info.name;}
         getAuthor () {return config.info.author;}
@@ -143,7 +149,7 @@ module.exports = (() => {
             });
         }
         
-        load () {
+        load(){
             if (!window.BDFDB_Global || !Array.isArray(window.BDFDB_Global.pluginQueue)) window.BDFDB_Global = Object.assign({}, window.BDFDB_Global, {pluginQueue: []});
             if (!window.BDFDB_Global.downloadModal) {
                 window.BDFDB_Global.downloadModal = true;
@@ -167,7 +173,7 @@ module.exports = (() => {
 
     } : (([Plugin, Api]) => {
         const plugin = (Plugin,Api) => {
-      
+            
 
             
             const {
@@ -317,32 +323,7 @@ module.exports = (() => {
                 }
             };
         };
-        /*let el = mouseEv.target;
-                        if (!el.className || (typeof el.className) != "string") return; // No class name
-                        if (el.className.indexOf("emojiItem") == -1) return; // Not an emoji
-                        if (!el.children[0]) return; // Emoji not yet loaded
-                        let disabled = el.className.indexOf("emojiItemDisabled") > -1;
-                        if (!disabled && this.settings.onlyDisabled) return;
-                        let link = el.children[0].src;
-                        
-                        DiscordAPI.currentChannel.sendMessage(
-                            this.settings.emojiSize > -1 ? link + "&size=" + this.settings.emojiSize : link
-                        );
-                        if (disabled)
-                        {
-                            // Hide the discord nitro ad
-                            // Do it as an interval in case the computer is very slow (check if popup is there every X time)
-                            let hidePromoInterval = setInterval(() => {
-                                let promo = document.querySelector("[class*=premiumPromo]");
-                                if (promo)
-                                {
-                                    promo.style.display = "none";
-                                    clearInterval(hidePromoInterval);
-                                }
-                            }, this.settings.hideAdDelay);
-                        }
-                    };
-                }*/
+       
         return plugin(Plugin, Api);
     })(global.ZeresPluginLibrary.buildPlugin(config));
 })();
