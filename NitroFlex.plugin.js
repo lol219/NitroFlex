@@ -90,7 +90,11 @@ module.exports = (() => {
             {
                 "title": 'changelog',
                 "type": 'fixed',
-                "items": ['**Plugin** : Discord and Screenshare Crash']
+                "items": [
+                "Plugin : Discord and Screenshare Crash",
+                "**Discord Crash**: Fixed that NitroFlex block other plugins"
+                
+                ]
             }
             
         ],   
