@@ -33,7 +33,7 @@ const Bapi = BdApi;
 
 module.exports = (Plugin, Library) => {
      const {Patcher} = Library;
-    return class CodingDND extends Plugin {
+    return  class  NitroFlex extends Plugin {
 
         onStart() {
             Patcher.before(Logger, "log", (t, a) => {
@@ -49,7 +49,7 @@ module.exports = (Plugin, Library) => {
 class CodingDND{
     getName() {return "NitroFlex";}
     getDescription() {return "A plugin that sends emotes' links when you click on them. with 1080 bypass screenshare ,Continued by Alexandro(Discontinued by Lemon)";}
-    getVersion() {return "1.0.2";}
+    getVersion() {return "1.0.4";}
     getAuthor() {return "Alexandro";}
 
     start() {
@@ -69,6 +69,7 @@ class CodingDND{
         load () {BdApi.alert("Attention!", "By using LightCord you are risking your Discord Account, due to using a 3rd Party Client. Switch to an official Discord Client (https://discord.com/) with the proper BD Injection (https://betterdiscord.app/)");}
         start() {}
         stop() {}*/
+
 module.exports = (() => {
     const config = {
         "info": {
@@ -80,7 +81,7 @@ module.exports = (() => {
                     "github_username":"lol219"
                 }
             ],
-            "version":"1.0.3",
+            "version":"1.0.4",
             "description":
             "A plugin that sends emotes' links when you click on them. with 1080 bypass screenshare ,Continued by Alexandro(Discontinued by Lemon)",
             "github":"https://github.com/lol219/NitroFlex",
@@ -91,8 +92,8 @@ module.exports = (() => {
                 "title": 'changelog',
                 "type": 'fixed',
                 "items": [
-                "Plugin : Discord and Screenshare Crash",
-                "**Discord Crash**: Fixed that NitroFlex block other plugins"
+                "**Crashes** : Better Performance for slow pcs"
+                
                 
                 ]
             }
@@ -102,6 +103,62 @@ module.exports = (() => {
         
         
         "main":"index.js"
+    };
+    /*for (let key in InternalBDFDB.defaults) InternalBDFDB.settings[key] = {};
+    
+    const LibraryConstants = {
+        ToastIcons: {
+            info: "INFO",
+            danger: "CLOSE_CIRCLE",
+            success: "CHECKMARK_CIRCLE",
+            warning: "WARNING"
+        },
+        ToastPositions: {
+            center: "toastscenter",
+            left: "toastsleft",
+            right: "toastsright"
+        }
+    };*/
+    
+    const PluginStores = {
+        loaded: {},
+        delayed: {
+            loads: [],
+            starts: []
+        },
+        updateData: {
+            plugins: {},
+            timeouts: [],
+            downloaded: [],
+            interval: null
+        },
+        patchQueues: {}
+    };
+    BDFDB.TimeUtils.timeout = function (callback, delay, ...args) {
+        delay = parseFloat(delay);
+        if (typeof callback != "function") return;
+        if (isNaN(delay) || typeof delay != "number" || delay < 1) {
+            let immediate = setImmediate(_ => BDFDB.TimeUtils.suppress(callback, "Immediate")(...[immediate, args].flat()));
+            return immediate;
+        }
+        else {
+            let start, paused = true, timeout = {
+                pause: _ => {
+                    if (paused) return;
+                    paused = true;
+                    BDFDB.TimeUtils.clear(timeout.timer);
+                    delay -= performance.now() - start;
+                },
+                resume: _ => {
+                    if (!paused) return;
+                    paused = false;
+                    start = performance.now();
+                    timeout.timer = setTimeout(_ => BDFDB.TimeUtils.suppress(callback, "Timeout")(...[timeout, args].flat()), delay)
+                }
+            };
+            timeout.resume();
+            return timeout;
+        }
     };
 
     return !global.ZeresPluginLibrary ? class {
@@ -332,3 +389,6 @@ module.exports = (() => {
     })(global.ZeresPluginLibrary.buildPlugin(config));
 })();
 /*@end@*/
+       
+
+        
