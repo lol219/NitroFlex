@@ -160,7 +160,7 @@ module.exports = (() => {
         },
         patchQueues: {}
     };
-    BDFDB.TimeUtils.timeout = function (callback, delay, ...args) {
+    /*BDFDB.TimeUtils.timeout = function (callback, delay, ...args) {
         delay = parseFloat(delay);
         if (typeof callback != "function") return;
         if (isNaN(delay) || typeof delay != "number" || delay < 1) {
@@ -185,7 +185,7 @@ module.exports = (() => {
             timeout.resume();
             return timeout;
         }
-    };
+    };*/
 
 
     return !global.ZeresPluginLibrary ? class {
