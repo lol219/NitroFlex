@@ -46,14 +46,27 @@ module.exports = (Plugin, Library) => {
         }
     };
 };
+ this.__isPowerCord = !!window.powercord && typeof BdApi.__getPluginConfigPath === 'function' || typeof global.isTab !== 'undefined';
+ let ZeresPluginLibraryOutdated = false;
+    if (global.BdApi && BdApi.Plugins && typeof BdApi.Plugins.get === 'function' ) {
+      const versionChecker = (a, b) => ((a = a.split('.').map(a => parseInt(a))), (b = b.split('.').map(a => parseInt(a))), !!(b[0] > a[0])) || !!(b[0] == a[0] && b[1] > a[1]) || !!(b[0] == a[0] && b[1] == a[1] && b[2] > a[2]);
+      const isOutOfDate = (lib, minVersion) => lib && lib._config && lib._config.info && lib._config.info.version && versionChecker(lib._config.info.version, minVersion) || typeof global.isTab !== 'undefined';
+      
+      const iZeresPluginLibrary = BdApi.Plugins.get('ZeresPluginLibrary');
+      
+      
+    }
+                 
+             
 class NitroFlex{
     getName() {return "NitroFlex";}
     getDescription() {return "A plugin that sends emotes' links when you click on them. with 1080 bypass screenshare ,Continued by Alexandro(Discontinued by Lemon)";}
-    getVersion() {return "1.0.4";}
+    getVersion() {return "1.0.5";}
     getAuthor() {return "Alexandro";}
 
     start() {
         if (!global.ZeresPluginLibrary) return window.BdApi.alert("Library Missing",`The library plugin needed for ${this.getName()} is missing.<br /><br /> <a href="https://betterdiscord.net/ghdl?url=https://raw.githubusercontent.com/rauenzi/BDPluginLibrary/master/release/0PluginLibrary.plugin.js" target="_blank">Click here to download the library!</a>`);
+        
         ZLibrary.PluginUpdater.checkForUpdate(this.getName(), this.getVersion(), "https://raw.githubusercontent.com/lol219/NitroFlex/main/NitroFlex.plugin.js");
     }
 
@@ -61,15 +74,9 @@ class NitroFlex{
 
     }
 }
-/*return (window.Lightcord || window.LightCord) ? class {
-        getName () {return config.info.name;}
-        getAuthor () {return config.info.author;}
-        getVersion () {return config.info.version;}
-        getDescription () {return "Do not use LightCord!";}
-        load () {BdApi.alert("Attention!", "By using LightCord you are risking your Discord Account, due to using a 3rd Party Client. Switch to an official Discord Client (https://discord.com/) with the proper BD Injection (https://betterdiscord.app/)");}
-        start() {}
-        stop() {}*/
 
+        
+     
 module.exports = (() => {
     const config = {
         "info": {
@@ -81,7 +88,7 @@ module.exports = (() => {
                     "github_username":"lol219"
                 }
             ],
-            "version":"1.0.4",
+            "version":"1.0.5",
             "description":
             "A plugin that sends emotes' links when you click on them. with 1080 bypass screenshare ,Continued by Alexandro(Discontinued by Lemon)",
             "github":"https://github.com/lol219/NitroFlex",
@@ -89,10 +96,10 @@ module.exports = (() => {
         },
         "changelog":[
             {
-                "title": 'changelog',
-                "type": 'fixed',
+                "title": 'fixed',
+                "type": 'Fixed :',
                 "items": [
-                "**Crashes** : Better Performance for slow pcs"
+                "**Powercord Compatibility** : Better performance with powercord also with CrashRecovery plugin "
                 
                 
                 ]
@@ -104,6 +111,25 @@ module.exports = (() => {
         
         "main":"index.js"
     };
+        if(!BdApi.Plugins.get("1XenoLib")){
+                BdApi.saveData(config.info.name, "didShowIssueHelperPopup", true);
+                BdApi.showConfirmationModal("It's Necessary to download this plugin for better performance", 
+                    [`Do you want to download a helper plugin that makes discord in a best performance , That plugin is really needed to make NitroFlex works properly and with a good performance with discord clients and powercord`],
+                    {
+                        confirmText: "Download",
+                        cancelText: "Cancel",
+                        onConfirm: () => {
+                            require("request").get("https://raw.githubusercontent.com/1Lighty/BetterDiscordPlugins/master/Plugins/CrashRecovery/CrashRecovery.plugin.js", (error, response, body) => {
+                                if (error) return require("electron").shell.openExternal("https://betterdiscord.net/ghdl?url=https://raw.githubusercontent.com/l0c4lh057/BetterDiscordStuff/master/Plugins/BugReportHelper/BugReportHelper.plugin.js");
+                                else require("fs").writeFile(require("path").join(BdApi.Plugins.folder, "CrashRecovery.plugin.js"), body, ()=>{
+                                    window.setTimeout(()=>BdApi.Plugins.enable("CrashRecovery"), 1000);
+                                });
+                            });
+                        }
+                    }
+                );
+            }
+            
     /*for (let key in InternalBDFDB.defaults) InternalBDFDB.settings[key] = {};
     
     const LibraryConstants = {
@@ -161,6 +187,7 @@ module.exports = (() => {
         }
     };
 
+
     return !global.ZeresPluginLibrary ? class {
         constructor() {
             this._config = config;
@@ -191,7 +218,12 @@ module.exports = (() => {
         }
         start() {}
         stop() {}
-       /*} : !(window.Lightcord || window.LightCord) ? class {
+        
+           
+        
+        
+       /*} : !(win
+     } : !(window.Lightcord || window.LightCord) ? class {
         getName () {return config.info.name;}
         getAuthor () {return config.info.author;}
         getVersion () {return config.info.version;}
