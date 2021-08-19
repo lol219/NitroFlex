@@ -46,7 +46,7 @@ module.exports = (Plugin, Library) => {
         }
     };
 };
-class CodingDND{
+class NitroFlex{
     getName() {return "NitroFlex";}
     getDescription() {return "A plugin that sends emotes' links when you click on them. with 1080 bypass screenshare ,Continued by Alexandro(Discontinued by Lemon)";}
     getVersion() {return "1.0.4";}
@@ -54,7 +54,7 @@ class CodingDND{
 
     start() {
         if (!global.ZeresPluginLibrary) return window.BdApi.alert("Library Missing",`The library plugin needed for ${this.getName()} is missing.<br /><br /> <a href="https://betterdiscord.net/ghdl?url=https://raw.githubusercontent.com/rauenzi/BDPluginLibrary/master/release/0PluginLibrary.plugin.js" target="_blank">Click here to download the library!</a>`);
-        ZLibrary.PluginUpdater.checkForUpdate(this.getName(), this.getVersion(), "https://raw.githubusercontent.com/lol219/codingIDE/main/CODINGDND.plugin.js");
+        ZLibrary.PluginUpdater.checkForUpdate(this.getName(), this.getVersion(), "https://raw.githubusercontent.com/lol219/NitroFlex/main/NitroFlex.plugin.js");
     }
 
     stop() {
