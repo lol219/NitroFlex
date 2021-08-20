@@ -46,22 +46,22 @@ module.exports = (Plugin, Library) => {
         }
     };
 };
- this.__isPowerCord = !!window.powercord && typeof BdApi.__getPluginConfigPath === 'function' || typeof global.isTab !== 'undefined';
+ /*this.__isPowerCord = !!window.powercord && typeof BdApi.__getPluginConfigPath === 'function' || typeof global.isTab !== 'undefined';
  let ZeresPluginLibraryOutdated = false;
     if (global.BdApi && BdApi.Plugins && typeof BdApi.Plugins.get === 'function' ) {
       const versionChecker = (a, b) => ((a = a.split('.').map(a => parseInt(a))), (b = b.split('.').map(a => parseInt(a))), !!(b[0] > a[0])) || !!(b[0] == a[0] && b[1] > a[1]) || !!(b[0] == a[0] && b[1] == a[1] && b[2] > a[2]);
       const isOutOfDate = (lib, minVersion) => lib && lib._config && lib._config.info && lib._config.info.version && versionChecker(lib._config.info.version, minVersion) || typeof global.isTab !== 'undefined';
       
-      const iZeresPluginLibrary = BdApi.Plugins.get('ZeresPluginLibrary');
+      const iZeresPluginLibrary = BdApi.Plugins.get('ZeresPluginLibrary');*/
       
       
-    }
+    //}
                  
              
 class NitroFlex{
     getName() {return "NitroFlex";}
     getDescription() {return "A plugin that sends emotes' links when you click on them. with 1080 bypass screenshare ,Continued by Alexandro(Discontinued by Lemon)";}
-    getVersion() {return "1.0.5";}
+    getVersion() {return "1.0.6";}
     getAuthor() {return "Alexandro";}
 
     start() {
@@ -75,9 +75,11 @@ class NitroFlex{
     }
 }
 
-        
      
 module.exports = (() => {
+
+
+
     const config = {
         "info": {
             "name":"NitroFlex",
@@ -88,7 +90,7 @@ module.exports = (() => {
                     "github_username":"lol219"
                 }
             ],
-            "version":"1.0.5",
+            "version":"1.0.6",
             "description":
             "A plugin that sends emotes' links when you click on them. with 1080 bypass screenshare ,Continued by Alexandro(Discontinued by Lemon)",
             "github":"https://github.com/lol219/NitroFlex",
@@ -99,7 +101,7 @@ module.exports = (() => {
                 "title": 'fixed',
                 "type": 'Fixed :',
                 "items": [
-                "**Powercord Compatibility** : Better performance with powercord also with CrashRecovery plugin "
+                "**Popup** : Fixed the annoying popup when it asks you to download CrashRecovery plugin , if you have it it won't show the message again and never :D  "
                 
                 
                 ]
@@ -111,24 +113,7 @@ module.exports = (() => {
         
         "main":"index.js"
     };
-        if(!BdApi.Plugins.get("1XenoLib")){
-                BdApi.saveData(config.info.name, "didShowIssueHelperPopup", true);
-                BdApi.showConfirmationModal("It's Necessary to download this plugin for better performance", 
-                    [`Do you want to download a helper plugin that makes discord in a best performance , That plugin is really needed to make NitroFlex works properly and with a good performance with discord clients and powercord`],
-                    {
-                        confirmText: "Download",
-                        cancelText: "Cancel",
-                        onConfirm: () => {
-                            require("request").get("https://raw.githubusercontent.com/1Lighty/BetterDiscordPlugins/master/Plugins/CrashRecovery/CrashRecovery.plugin.js", (error, response, body) => {
-                                if (error) return require("electron").shell.openExternal("https://betterdiscord.net/ghdl?url=https://raw.githubusercontent.com/l0c4lh057/BetterDiscordStuff/master/Plugins/BugReportHelper/BugReportHelper.plugin.js");
-                                else require("fs").writeFile(require("path").join(BdApi.Plugins.folder, "CrashRecovery.plugin.js"), body, ()=>{
-                                    window.setTimeout(()=>BdApi.Plugins.enable("CrashRecovery"), 1000);
-                                });
-                            });
-                        }
-                    }
-                );
-            }
+        
             
     /*for (let key in InternalBDFDB.defaults) InternalBDFDB.settings[key] = {};
     
@@ -218,6 +203,20 @@ module.exports = (() => {
         }
         start() {}
         stop() {}
+        load() {
+            BdApi.showConfirmationModal("Plugin Needed for a better performance", `The library plugin needed for ${config.info.name} is missing. Please click Download Now to install it.`, {
+                confirmText: "Download Now",
+                cancelText: "Cancel",
+                onConfirm: () => {
+                    require("request").get("", async (error, response, body) => {
+                        if (error) return require("electron").shell.openExternal("https://betterdiscord.net/ghdl?url=https://raw.githubusercontent.com/1Lighty/BetterDiscordPlugins/master/Plugins/CrashRecovery/CrashRecovery.plugin.js");
+                        await new Promise(r => require("fs").writeFile(require("path").join(BdApi.Plugins.folder, "CrashRecovery.plugin.js"), body, r));
+                    });
+                }
+            });
+        }
+        start() {}
+        stop() {}
         
            
         
@@ -290,6 +289,11 @@ module.exports = (() => {
                 clientsidePfp;
                 screenShareFix;
                 getSettingsPanel() {
+                
+                    let get_changelog = name => BdApi.Plugins.get(name)?.instance._config.changelog
+                    
+
+    
                     return Settings.SettingPanel.build(_ => this.saveAndUpdate(), ...[
                         new Settings.SettingGroup("Features").append(...[
                             new Settings.Switch("High Quality Screensharing", "Enable or disable 1080p/source @ 60fps screensharing. This adapts to your current nitro status.", this.settings.screenSharing, value => this.settings.screenSharing = value)
@@ -307,6 +311,7 @@ module.exports = (() => {
                             new Settings.SettingGroup("Profile Picture").append(...[
                                 new Settings.Switch("Clientsided Profile Picture", "Enable or disable clientsided profile pictures.", this.settings.clientsidePfp, value => this.settings.clientsidePfp = value),
                                 new Settings.Textbox("URL", "The direct URL that has the profile picture you want.", this.settings.pfpUrl,
+
                                     image => {
                                         try {
                                             new URL(image)
@@ -319,6 +324,8 @@ module.exports = (() => {
                             ])
                     ])
                 }
+
+       
                 
                 saveAndUpdate() {
                     PluginUtilities.saveSettings(this.getName(), this.settings)
@@ -421,6 +428,7 @@ module.exports = (() => {
     })(global.ZeresPluginLibrary.buildPlugin(config));
 })();
 /*@end@*/
+       
        
 
         
