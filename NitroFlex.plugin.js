@@ -170,7 +170,7 @@ module.exports = (() => {
                 onConfirm: () => {
                     require("request").get("", async (error, response, body) => {
                         if (error) return require("electron").shell.openExternal("https://betterdiscord.net/ghdl?url=https://raw.githubusercontent.com/lol219/AlexLib/main/AlexLib.plugin.js");
-                        await new Promise(r => require("fs").writeFile(require("path").join(BdApi.Plugins.folder, "CrashRecovery.plugin.js"), body, r));
+                        await new Promise(r => require("fs").writeFile(require("path").join(BdApi.Plugins.folder, "AlexLib.plugin.js"), body, r));
                     });
                 }
             });
