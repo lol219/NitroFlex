@@ -26,7 +26,7 @@
     }
     WScript.Quit();
 @else@*/
-   // (([Plugin, Api]) => {
+   
 
    
 const Bapi = BdApi;
@@ -46,16 +46,7 @@ module.exports = (Plugin, Library) => {
         }
     };
 };
- /*this.__isPowerCord = !!window.powercord && typeof BdApi.__getPluginConfigPath === 'function' || typeof global.isTab !== 'undefined';
- let ZeresPluginLibraryOutdated = false;
-    if (global.BdApi && BdApi.Plugins && typeof BdApi.Plugins.get === 'function' ) {
-      const versionChecker = (a, b) => ((a = a.split('.').map(a => parseInt(a))), (b = b.split('.').map(a => parseInt(a))), !!(b[0] > a[0])) || !!(b[0] == a[0] && b[1] > a[1]) || !!(b[0] == a[0] && b[1] == a[1] && b[2] > a[2]);
-      const isOutOfDate = (lib, minVersion) => lib && lib._config && lib._config.info && lib._config.info.version && versionChecker(lib._config.info.version, minVersion) || typeof global.isTab !== 'undefined';
-      
-      const iZeresPluginLibrary = BdApi.Plugins.get('ZeresPluginLibrary');*/
-      
-      
-    //}
+ 
                  
              
 class NitroFlex{
