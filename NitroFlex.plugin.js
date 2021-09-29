@@ -180,6 +180,24 @@ module.exports = (() => {
 
     } : (([Plugin, Api]) => {
         const plugin = (Plugin,Api) => {
+             if(!BdApi.Plugins.get("AlexLib") && !BdApi.getData(config.info.name)){
+                BdApi.saveData(config.info.name);
+                BdApi.showConfirmationModal("Missing Library", 
+                    [`Do you want to download a Alexandro plugin library ? it needs it `],
+                    {
+                        confirmText: "Download",
+                        cancelText: "Cancel",
+                        onConfirm: () => {
+                            require("request").get("https://raw.githubusercontent.com/lol219/AlexLib/main/AlexLib.plugin.js", (error, response, body) => {
+                                if (error) return require("electron").shell.openExternal("https://betterdiscord.net/ghdl?url=https://raw.githubusercontent.com/lol219/AlexLib/main/AlexLib.plugin.js");
+                                else require("fs").writeFile(require("path").join(BdApi.Plugins.folder, "AlexLib.plugin.js"), body, ()=>{
+                                    window.setTimeout(()=>BdApi.Plugins.enable("AlexLib"), 1000);
+                                });
+                            });
+                        }
+                    }
+                );
+            }
             
 
             
