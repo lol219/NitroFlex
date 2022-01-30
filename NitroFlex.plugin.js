@@ -52,7 +52,7 @@ module.exports = (Plugin, Library) => {
 class NitroFlex{
     getName() {return "NitroFlex";}
     getDescription() {return "A plugin that sends emotes' links when you click on them. with 1080 bypass screenshare ,Continued by Alexandro(Discontinued by Lemon)";}
-    getVersion() {return "1.0.7";}
+    getVersion() {return "1.0.8";}
     getAuthor() {return "Alexandro";}
 
     start() {
@@ -80,16 +80,16 @@ module.exports = (() => {
                     "github_username":"lol219"
                 }
             ],
-            "version":"1.0.7",
+            "version":"1.0.8",
             "description":
-            "A plugin that sends emotes' links when you click on them. with 1080 bypass screenshare ,Continued by Alexandro(Discontinued by Lemon)",
+            "A plugin that sends emotes' links when you click on them. with 1080 bypass screenshare ,Continued by Alexandro (Discontinued by Lemon)",
             "github":"https://github.com/lol219/NitroFlex",
             "github_raw":"https://raw.githubusercontent.com/lol219/NitroFlex/main/NitroFlex.plugin.js"
         },
         "changelog":[
             {
-                "title": 'fixed',
-                "type": 'Fixed :',
+                "title": 'improved',
+                "type": 'Improved :',
                 "items": [
                 "Fixed : Alexlib functions (You should delete zereplugin and replace it with this one : https://raw.githubusercontent.com/BlackusPL/OnesPluginLibrary/main/0PluginLibrary.plugin.js), because the original one is broken so eh"
                 
