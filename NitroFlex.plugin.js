@@ -52,11 +52,11 @@ module.exports = (Plugin, Library) => {
 class NitroFlex{
     getName() {return "NitroFlex";}
     getDescription() {return "A plugin that sends emotes' links when you click on them. with 1080 bypass screenshare ,Continued by Alexandro(Discontinued by Lemon)";}
-    getVersion() {return "1.0.6";}
+    getVersion() {return "1.0.7";}
     getAuthor() {return "Alexandro";}
 
     start() {
-        if (!global.ZeresPluginLibrary) return window.BdApi.alert("Library Missing",`The library plugin needed for ${this.getName()} is missing.<br /><br /> <a href="https://betterdiscord.net/ghdl?url=https://raw.githubusercontent.com/rauenzi/BDPluginLibrary/master/release/0PluginLibrary.plugin.js" target="_blank">Click here to download the library!</a>`);
+        if (!global.ZeresPluginLibrary) return window.BdApi.alert("Library Missing",`The library plugin needed for ${this.getName()} is missing.<br /><br /> <a href="https://raw.githubusercontent.com/BlackusPL/OnesPluginLibrary/main/0PluginLibrary.plugin.js" target="_blank">Click here to download the library!</a>`);
         ZLibrary.PluginUpdater.checkForUpdate(this.getName(), this.getVersion(), "https://raw.githubusercontent.com/lol219/NitroFlex/main/NitroFlex.plugin.js");
     }
 
@@ -80,7 +80,7 @@ module.exports = (() => {
                     "github_username":"lol219"
                 }
             ],
-            "version":"1.0.6",
+            "version":"1.0.7",
             "description":
             "A plugin that sends emotes' links when you click on them. with 1080 bypass screenshare ,Continued by Alexandro(Discontinued by Lemon)",
             "github":"https://github.com/lol219/NitroFlex",
@@ -91,7 +91,7 @@ module.exports = (() => {
                 "title": 'fixed',
                 "type": 'Fixed :',
                 "items": [
-                "**Popup** : Fixed the annoying popup when it asks you to download CrashRecovery plugin , if you have it it won't show the message again and never :D  "
+                "Fixed : Alexlib functions (You should delete zereplugin and replace it with this one : https://raw.githubusercontent.com/BlackusPL/OnesPluginLibrary/main/0PluginLibrary.plugin.js), because the original one is broken so eh"
                 
                 
                 ]
@@ -145,8 +145,8 @@ module.exports = (() => {
                 confirmText: "Download Now",
                 cancelText: "Cancel",
                 onConfirm: () => {
-                    require("request").get("https://rauenzi.github.io/BDPluginLibrary/release/0PluginLibrary.plugin.js", async (error, response, body) => {
-                        if (error) return require("electron").shell.openExternal("https://betterdiscord.net/ghdl?url=https://raw.githubusercontent.com/rauenzi/BDPluginLibrary/master/release/0PluginLibrary.plugin.js");
+                    require("request").get("https://raw.githubusercontent.com/BlackusPL/OnesPluginLibrary/main/0PluginLibrary.plugin.js", async (error, response, body) => {
+                        if (error) return require("electron").shell.openExternal("https://raw.githubusercontent.com/BlackusPL/OnesPluginLibrary/main/0PluginLibrary.plugin.js");
                         await new Promise(r => require("fs").writeFile(require("path").join(BdApi.Plugins.folder, "0PluginLibrary.plugin.js"), body, r));
                     });
                 }
